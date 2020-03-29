@@ -9,7 +9,7 @@ public class MyGarage {
 
     public MyGarage() {
         cars = new ArrayList<String>();
-        cars.add("H");
+        cars.add("A");
         cars.add("I");
         cars.add("J");
     }
