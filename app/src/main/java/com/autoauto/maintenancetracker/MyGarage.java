@@ -11,6 +11,6 @@ public class MyGarage {
         cars = new ArrayList<String>();
         cars.add("A");
         cars.add("B");
-        cars.add("J");
+        cars.add("C");
     }
 }
