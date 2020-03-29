@@ -17,11 +17,24 @@ import java.io.ObjectOutputStream;
 
 public class AutoAutoApplication extends Application {
     // app-wide data can go here
-    private DataLibrary dataLibrary = new DataLibrary();
-    public DataLibrary getDataLibrary() { return dataLibrary; }
-
     private Vehicle vehicle;
     public Vehicle getVehicle() { return vehicle; }
+
+    // this is just to hold miles in case the car hasn't been initialized yet
+    private int milesTemp = -1;
+    public int getMilesTemp() { return milesTemp; }
+
+    public void UpdateMiles(int miles) {
+        if(vehicle != null) {
+            if (vehicle.getMiles() < miles) {
+                vehicle.setMiles(miles);
+            }
+        }
+        else {
+            milesTemp = miles;
+        }
+    }
+
     public void setVehicle(Vehicle vehicle) {
         if(this.vehicle != null) {
             Log.w("Application", "Non-null vehicle was set");

@@ -18,12 +18,12 @@
             android:id="@+id/btMaintenance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
             android:text="Maintenance"
-            android:textSize="24sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvMiles" />
+            app:layout_constraintTop_toBottomOf="@+id/btAlerts" />
 
         <TextView
             android:id="@+id/tvMiles"
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Edit Vehicle"
-            android:textSize="24sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btMaintenance" />
@@ -91,6 +91,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvModel" />
+
+        <Button
+            android:id="@+id/btAlerts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="# Alerts"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMiles" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,7 @@ import com.autoauto.maintenancetracker.util.Vehicle;
 
 public class AboutVehicleActivity extends AutoAutoActivity {
     TextView tvMake, tvModel, tvYear;
-    Button btMaintenance;
+    Button btAlerts, btMaintenance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,8 @@ public class AboutVehicleActivity extends AutoAutoActivity {
         tvModel = findViewById(R.id.tvModel);
         tvYear = findViewById(R.id.tvYear);
 
+        btAlerts = findViewById(R.id.btAlerts);
+
         btMaintenance = findViewById(R.id.btMaintenance);
         btMaintenance.setOnClickListener(clickMaintenance);
     }
@@ -31,11 +33,21 @@ public class AboutVehicleActivity extends AutoAutoActivity {
     public void onResume() {
         super.onResume();
         Vehicle vehicle = application.getVehicle();
+        Log.i("AboutVehicle", "onResume was called");
         Log.i("onResume", String.format("%s, %s, %s", vehicle.getMake(), vehicle.getModel(), vehicle.getYear()));
 
         tvMake.setText(vehicle.getMake());
         tvModel.setText(vehicle.getModel());
         tvYear.setText(vehicle.getYear());
+
+        int alertCount = vehicle.getMaintenanceScheduler().getAlertedTasks().size();
+        if(alertCount == 0) {
+            btAlerts.setEnabled(false);
+            btAlerts.setText("0 Alerts");
+        }
+        else {
+            btAlerts.setText(alertCount + " Alerts");
+        }
     }
 
     View.OnClickListener clickMaintenance = new View.OnClickListener() {

@@ -75,8 +75,7 @@ public class AutoAutoActivity extends AppCompatActivity {
         @Override
         public void receive(Measurement measurement) {
             Odometer miles = (Odometer) measurement;
-            AutoAutoApplication app = (AutoAutoApplication) getApplication();
-            app.getDataLibrary().UpdateMiles(miles.getValue().intValue());
+            application.UpdateMiles(miles.getValue().intValue());
         }
     };
 }

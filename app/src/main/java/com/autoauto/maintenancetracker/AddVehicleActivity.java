@@ -36,7 +36,7 @@ public class AddVehicleActivity extends AutoAutoActivity {
             Log.i("onClick", String.format("%s, %s, %s", make, model, year));
 
             if (!make.equals("") && !model.equals("") && !year.equals("")) {
-                application.setVehicle(new Vehicle(make, model, year));
+                application.setVehicle(new Vehicle(make, model, year, application.getMilesTemp()));
                 // commented out for debugging
                 // application.SaveVehicle();
                 finish();

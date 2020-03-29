@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ViewAlertsActivity"
+            android:label="View Alerts" />
+        <activity
             android:name=".MaintenanceActivity"
             android:label="Maintenance Schedule" />
         <activity
