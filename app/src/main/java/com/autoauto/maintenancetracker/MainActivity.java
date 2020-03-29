@@ -1,6 +1,8 @@
 package com.autoauto.maintenancetracker;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,21 +10,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.openxc.VehicleManager;
 
 public class MainActivity extends AutoAutoActivity {
-    // declare controls here
-    RecyclerView rvCars;
 
     @Override
-    // when the activity is first opened
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
 
-        // set references to controls here
-        rvCars = findViewById(R.id.rvCars);
-        // apparently passing String[0] in is common
-        String[] carArray = (String[]) application.getMyGarage().getCars().toArray(new String[0]);
-        CarListAdapter carListAdapter = new CarListAdapter(this, carArray);
-        rvCars.setAdapter(carListAdapter);
-        rvCars.setLayoutManager(new LinearLayoutManager(this));
+    @Override
+    public void onResume() {
+        super.onResume();
+        application.LoadVehicle();
+
+        if(application.getVehicle() == null) {
+            Intent addVehicle = new Intent(this, AddVehicleActivity.class);
+            startActivity(addVehicle);
+        }
+        else {
+            Intent aboutVehicle = new Intent(this, AboutVehicleActivity.class);
+            startActivity(aboutVehicle);
+        }
     }
 }

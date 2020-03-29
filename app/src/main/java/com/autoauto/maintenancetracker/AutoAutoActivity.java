@@ -19,9 +19,9 @@ import com.openxc.measurements.Odometer;
  */
 
 public class AutoAutoActivity extends AppCompatActivity {
-    // !!! I had to import guava:24.1-android under Project Structure for openxc
+    // !!! I had to import guava:24.1-android under Project Structure for openxc to work
     protected  AutoAutoApplication application;
-    protected VehicleManager mVehicle;
+    protected VehicleManager mVehicleManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class AutoAutoActivity extends AppCompatActivity {
     // when the activity is resumed
     public void onResume() {
         super.onResume();
-        if (mVehicle == null) {
+        if (mVehicleManager == null) {
             // getApplicationContext() is app-wide
             //Intent managerService = new Intent(getApplicationContext(), VehicleManager.class);
             Intent managerService = new Intent(this, VehicleManager.class);
@@ -46,11 +46,11 @@ public class AutoAutoActivity extends AppCompatActivity {
     public void onPause() {
         super.onPause();
         // to "prevent memory leaks"
-        if (mVehicle != null) {
+        if (mVehicleManager != null) {
             // could log here
             // remove listeners here
             unbindService(mConnection);
-            mVehicle = null;
+            mVehicleManager = null;
         }
     }
 
@@ -59,15 +59,15 @@ public class AutoAutoActivity extends AppCompatActivity {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             // could log here
-            mVehicle = ((VehicleManager.VehicleBinder) iBinder).getService();
+            mVehicleManager = ((VehicleManager.VehicleBinder) iBinder).getService();
             // add listeners here
-            mVehicle.addListener(Odometer.class, mOdometerListener);
+            mVehicleManager.addListener(Odometer.class, mOdometerListener);
         }
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
             // could log here
-            mVehicle = null;
+            mVehicleManager = null;
         }
     };
 

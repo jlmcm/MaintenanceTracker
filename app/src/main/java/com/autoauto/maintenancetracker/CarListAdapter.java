@@ -54,7 +54,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.ViewHold
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvCarName = itemView.findViewById(R.id.tvCarName);
+            tvCarName = itemView.findViewById(R.id.tvMake);
             parentLayout = itemView.findViewById(R.id.rowLayout);
         }
     }
