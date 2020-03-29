@@ -10,7 +10,7 @@ public class MyGarage {
     public MyGarage() {
         cars = new ArrayList<String>();
         cars.add("A");
-        cars.add("I");
+        cars.add("B");
         cars.add("J");
     }
 }
