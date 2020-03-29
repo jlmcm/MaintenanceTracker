@@ -9,8 +9,8 @@ public class MyGarage {
 
     public MyGarage() {
         cars = new ArrayList<String>();
-        cars.add("A");
-        cars.add("B");
         cars.add("C");
+        cars.add("D");
+        cars.add("E");
     }
 }
