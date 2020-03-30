@@ -1,5 +1,7 @@
 package com.autoauto.maintenancetracker.util;
 
+import android.util.Log;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -10,6 +12,7 @@ public class MaintenanceScheduler {
     public void setCurrentMiles(int miles) { currentMiles = miles; }
 
     private ArrayList<TaskTemplate> taskList;
+    public ArrayList<TaskTemplate> getTaskList() { return taskList; }
 
     private ArrayList<Task> upcomingTasks;
     public ArrayList<Task> getUpcomingTasks() { return upcomingTasks; }
@@ -47,6 +50,22 @@ public class MaintenanceScheduler {
             upcomingTasks.add(new Task(t, currentMiles, nextTaskID));
             nextTaskID++;
         }
+    }
+
+    public void ExpireTask(int id) {
+        Task task = null;
+        for (Task t : alertedTasks) {
+            if(t.getId() == id) task = t;
+        }
+
+        if(task != null) {
+            alertedTasks.remove(task);
+            expiredTasks.add(task);
+        }
+        else {
+            Log.w("MaintenanceScheduler", "Tried to expire a task that wasn't alerted");
+        }
+
     }
 
     public void AlertTask(Task task) {

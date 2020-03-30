@@ -1,10 +1,16 @@
 package com.autoauto.maintenancetracker;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,15 +21,18 @@ import java.util.ArrayList;
 
 // android dev must be some sort of sick practical joke or something wtf
 // i   l o v e   t y p i n g   b o i l e r p l a t e   c o d e
+// android development makes me wanna lolli-pop myself
 
-public class AlertAdapter extends RecyclerView.Adapter<AlertAdapter.ViewHolder> {
-    private ViewAlertsActivity context;
-    private ArrayList<Task> alerts;
+// basically a modified AlertAdapter
+
+public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder> {
+    private Context context;
+    private ArrayList<Task> logs;
     private int currentMiles;
 
-    public AlertAdapter(ViewAlertsActivity context, ArrayList<Task> alerts, int miles) {
+    public LogAdapter(Context context, ArrayList<Task> logs, int miles) {
         this.context = context;
-        this.alerts = alerts;
+        this.logs = logs;
         this.currentMiles = miles;
     }
 
@@ -31,27 +40,18 @@ public class AlertAdapter extends RecyclerView.Adapter<AlertAdapter.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.alert_item, parent, false);
-
-        final ViewHolder viewHolder = new ViewHolder(view);
-
-        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                context.DismissDialog(viewHolder.getAdapterPosition());
-            }
-        });
-        return viewHolder;
+        View view = inflater.inflate(R.layout.log_item, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        holder.tvName.setText(alerts.get(position).getName());
-        holder.tvMilesAgo.setText(currentMiles - alerts.get(position).getAlertMileMark() + " Miles Ago");
+        holder.tvName.setText(logs.get(position).getName());
+        holder.tvMilesAgo.setText(currentMiles - logs.get(position).getAlertMileMark() + " Miles Ago");
     }
 
     @Override
-    public int getItemCount() { return alerts.size(); }
+    public int getItemCount() { return logs.size(); }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvName, tvMilesAgo;

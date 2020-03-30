@@ -12,7 +12,7 @@ import com.autoauto.maintenancetracker.util.Vehicle;
 
 public class MaintenanceActivity extends AutoAutoActivity {
     TextView tvUpcomingPlaceholder;
-    Button btAlerts, btLog;
+    Button btAlerts, btLog, btEditSchedule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,12 @@ public class MaintenanceActivity extends AutoAutoActivity {
         btAlerts.setOnClickListener(clickAlerts);
 
         tvUpcomingPlaceholder = findViewById(R.id.tvUpcomingPlaceholder);
+
         btLog = findViewById(R.id.btLog);
+        btLog.setOnClickListener(clickLog);
+
+        btEditSchedule = findViewById(R.id.btEditSchedule);
+        btEditSchedule.setOnClickListener(clickEditSchedule);
     }
 
     @Override
@@ -56,6 +61,22 @@ public class MaintenanceActivity extends AutoAutoActivity {
         public void onClick(View v) {
             Intent viewAlerts = new Intent(v.getContext(), ViewAlertsActivity.class);
             startActivity(viewAlerts);
+        }
+    };
+
+    View.OnClickListener clickLog = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent viewLog = new Intent(v.getContext(), ViewLogActivity.class);
+            startActivity(viewLog);
+        }
+    };
+
+    View.OnClickListener clickEditSchedule = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent editSchedule = new Intent(v.getContext(), EditScheduleActivity.class);
+            startActivity(editSchedule);
         }
     };
 }

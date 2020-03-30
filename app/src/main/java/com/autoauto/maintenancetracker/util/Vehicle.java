@@ -26,4 +26,10 @@ public class Vehicle {
         this.year = year;
         this.maintenanceScheduler = new MaintenanceScheduler(miles);
     }
+
+    public void setInfo(String make, String model, String year) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    }
 }

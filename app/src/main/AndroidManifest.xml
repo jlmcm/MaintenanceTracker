@@ -10,9 +10,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".EditScheduleActivity"></activity>
+        <activity
+            android:name=".EditVehicleActivity"
+            android:label="Edit Vehicle" />
+        <activity
+            android:name=".ViewLogActivity"
+            android:label="Log" />
         <activity
             android:name=".ViewAlertsActivity"
-            android:label="View Alerts" />
+            android:label="Alerts" />
         <activity
             android:name=".MaintenanceActivity"
             android:label="Maintenance Schedule" />
