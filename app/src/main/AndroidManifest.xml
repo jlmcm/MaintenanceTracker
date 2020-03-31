@@ -10,12 +10,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AboutVehicleActivity"
-            android:label="Vehicle Details"
-            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".EditScheduleActivity"></activity>
+        <activity
+            android:name=".EditVehicleActivity"
+            android:label="Edit Vehicle" />
+        <activity
+            android:name=".ViewLogActivity"
+            android:label="Log" />
+        <activity
+            android:name=".ViewAlertsActivity"
+            android:label="Alerts" />
+        <activity
+            android:name=".MaintenanceActivity"
+            android:label="Maintenance Schedule" />
+        <activity
+            android:name=".AddVehicleActivity"
+            android:label="Create Vehicle" />
+        <activity
+            android:name=".AboutVehicleActivity"
+            android:label="Vehicle Details" />
         <activity
             android:name=".MainActivity"
-            android:label="My Garage">
+            android:label="Maintenance Tracker">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
