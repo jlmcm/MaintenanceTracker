@@ -53,9 +53,8 @@ public class ViewAlertsActivity extends AutoAutoActivity {
 
     public void DismissAlert(int position) {
         MaintenanceScheduler maintenanceScheduler = application.getVehicle().getMaintenanceScheduler();
-        int alertId = maintenanceScheduler.getAlertedTasks().get(position).getId();
         
-        maintenanceScheduler.ExpireTask(alertId);
+        maintenanceScheduler.ExpireTask(position);
         rvAlerts.getAdapter().notifyItemRemoved(position);
     }
 }

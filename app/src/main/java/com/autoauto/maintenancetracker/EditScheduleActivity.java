@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.autoauto.maintenancetracker.util.MaintenanceScheduler;
 import com.autoauto.maintenancetracker.util.TaskTemplate;
@@ -42,14 +44,35 @@ public class EditScheduleActivity extends AutoAutoActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Change Mile Period");
-        builder.setView(R.layout.edit_mile_dialog);
-        // add the listener for this
-        builder.setPositiveButton("Apply", null);
+
+        // all this for a view
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.edit_mile_dialog, null);
+        final EditText etMiles = view.findViewById(R.id.etMiles);
+        etMiles.setText("" + task.getAlertPeriodMiles());
+
+        builder.setView(view);
+
+        builder.setPositiveButton("Apply", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                context.ChangeSchedule(position, etMiles.getText().toString());
+            }
+        });
 
         AlertDialog modifyDialog = builder.create();
         modifyDialog.show();
+    }
 
-        EditText etMiles = modifyDialog.findViewById(R.id.etMiles);
-        etMiles.setText("" + task.getAlertPeriodMiles());
+    public void ChangeSchedule(int position, String mileString) {
+        try {
+            int milePeriod = Integer.parseInt(mileString);
+            application.getVehicle().getMaintenanceScheduler().SetMilePeriod(position, milePeriod);
+            Toast.makeText(this, "Updated Settings", Toast.LENGTH_SHORT).show();
+            rvSchedule.getAdapter().notifyItemChanged(position);
+        }
+        catch (NumberFormatException e) {
+            Toast.makeText(this, "Invalid entry", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -52,11 +52,8 @@ public class MaintenanceScheduler {
         }
     }
 
-    public void ExpireTask(int id) {
-        Task task = null;
-        for (Task t : alertedTasks) {
-            if(t.getId() == id) task = t;
-        }
+    public void ExpireTask(int position) {
+        Task task = alertedTasks.get(position);
 
         if(task != null) {
             alertedTasks.remove(task);
@@ -65,7 +62,21 @@ public class MaintenanceScheduler {
         else {
             Log.w("MaintenanceScheduler", "Tried to expire a task that wasn't alerted");
         }
+    }
 
+    public void SetMilePeriod(int position, int milePeriod) {
+        // update the task templates, as well as current tasks
+        // also request an update of all tasks
+
+        TaskTemplate taskTemplate = taskList.get(position);
+        taskTemplate.setAlertPeriodMiles(milePeriod);
+
+        for (Task t : upcomingTasks) {
+            if(t.getName().equals(taskTemplate.getName())) {
+                t.setAlertPeriodMiles(milePeriod);
+            }
+        }
+        UpdateTasks();
     }
 
     public void AlertTask(Task task) {
