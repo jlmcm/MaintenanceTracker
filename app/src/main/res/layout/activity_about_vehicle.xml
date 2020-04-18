@@ -4,104 +4,153 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CCFCFC"
     tools:context=".AboutVehicleActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/constraintLayout2"
+        android:layout_width="302dp"
+        android:layout_height="744dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="109dp"
+        android:layout_marginEnd="51dp"
+        android:layout_marginBottom="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/btMaintenance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_width="422dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="443dp"
+            android:layout_marginBottom="161dp"
+            android:background="#9DEDE5"
             android:text="Maintenance"
             android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btAlerts" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvMiles"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_width="373dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="604dp"
             android:textAlignment="center"
-            android:textSize="28sp"
+            android:textColor="#0C0000"
+            android:textSize="40sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivPhoto"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Miles: miles" />
 
         <ImageView
             android:id="@+id/ivPhoto"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_marginTop="32dp"
+            android:layout_width="157dp"
+            android:layout_height="149dp"
+            android:layout_marginStart="67dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="67dp"
+            android:layout_marginBottom="445dp"
+            android:background="@drawable/wheel"
+            android:scaleType="fitCenter"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvYear"
-            app:srcCompat="@android:drawable/ic_menu_crop" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
         <TextView
             android:id="@+id/tvMake"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="161dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="236dp"
+            android:layout_marginEnd="65dp"
+            android:layout_marginBottom="414dp"
+            android:background="#00000000"
+            android:fontFamily="sans-serif"
             android:text="Make"
             android:textAlignment="center"
-            android:textSize="24sp"
+            android:textColor="#575757"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btEditVehicle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_width="422dp"
+            android:layout_height="72dp"
+            android:layout_marginTop="512dp"
+            android:layout_marginBottom="90dp"
+            android:background="#A7ECEA"
             android:text="Edit Vehicle"
             android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btMaintenance" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvModel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_width="160dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="260dp"
+            android:layout_marginEnd="67dp"
+            android:layout_marginBottom="391dp"
             android:text="Model"
             android:textAlignment="center"
-            android:textSize="24sp"
+            android:textColor="#575757"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvMake" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvYear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_width="160dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="284dp"
+            android:layout_marginEnd="67dp"
+            android:layout_marginBottom="367dp"
             android:text="Year"
-            android:textSize="24sp"
+            android:textAlignment="center"
+            android:textColor="#575757"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvModel" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btAlerts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_width="418dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="372dp"
+            android:layout_marginBottom="232dp"
+            android:background="#F8CCDA"
             android:text="# Alerts"
             android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvMiles" />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

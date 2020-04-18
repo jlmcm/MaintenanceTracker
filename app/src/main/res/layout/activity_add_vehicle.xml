@@ -4,102 +4,153 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CCFCFC"
     tools:context=".AddVehicleActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="346dp"
+        android:layout_height="505dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="114dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="75dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.266"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <EditText
             android:id="@+id/etModel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_width="185dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="173dp"
+            android:layout_marginTop="226dp"
+            android:layout_marginEnd="31dp"
+            android:layout_marginBottom="260dp"
             android:ems="10"
             android:hint="Model"
             android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etMake" />
+            app:layout_constraintHorizontal_bias="0.586"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/tvMake"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="164dp"
+            android:layout_marginEnd="280dp"
+            android:layout_marginBottom="343dp"
             android:text="Vehicle Make:"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/etMake"
-            app:layout_constraintEnd_toStartOf="@+id/etMake"
-            app:layout_constraintTop_toTopOf="@+id/etMake" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.138"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/tvYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="302dp"
+            android:layout_marginEnd="288dp"
+            android:layout_marginBottom="205dp"
             android:text="Vehicle Year:"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/etYear"
-            app:layout_constraintEnd_toStartOf="@+id/etYear"
-            app:layout_constraintTop_toTopOf="@+id/etYear" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.138"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/tvModel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="233dp"
+            android:layout_marginEnd="274dp"
+            android:layout_marginBottom="274dp"
             android:text="Vehicle Model:"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/etModel"
-            app:layout_constraintEnd_toStartOf="@+id/etModel"
-            app:layout_constraintTop_toTopOf="@+id/etModel" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.14"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <EditText
             android:id="@+id/etMake"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_width="186dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="173dp"
+            android:layout_marginTop="155dp"
+            android:layout_marginEnd="31dp"
+            android:layout_marginBottom="331dp"
             android:ems="10"
             android:hint="Make"
             android:inputType="textPersonName"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+            app:layout_constraintHorizontal_bias="0.59"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <EditText
             android:id="@+id/etYear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_width="184dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="173dp"
+            android:layout_marginTop="293dp"
+            android:layout_marginEnd="31dp"
+            android:layout_marginBottom="193dp"
             android:ems="10"
             android:hint="Year"
             android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etModel" />
+            app:layout_constraintHorizontal_bias="0.619"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <Button
             android:id="@+id/btCreate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_width="452dp"
+            android:layout_height="72dp"
+            android:layout_marginTop="424dp"
+            android:layout_marginBottom="55dp"
+            android:background="#B0F3F3"
             android:text="Create Vehicle"
             android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etYear" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="301dp"
+            android:layout_height="108dp"
+            android:layout_marginTop="28dp"
             android:text="No vehicle information was found.\nPlease fill in the following to create a vehicle."
             android:textAlignment="center"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.511"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
