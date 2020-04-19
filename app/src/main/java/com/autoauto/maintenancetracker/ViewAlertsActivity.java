@@ -48,11 +48,16 @@ public class ViewAlertsActivity extends AutoAutoActivity {
 
         // performed button
         Button btPerformed = view.findViewById(R.id.btPerformed);
+
+        builder.setView(view);
+        final AlertDialog dismissAlert = builder.create();
+
         btPerformed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "Performed", Toast.LENGTH_SHORT).show();
                 DismissAlert(position);
+                dismissAlert.dismiss();
             }
         });
 
@@ -63,10 +68,10 @@ public class ViewAlertsActivity extends AutoAutoActivity {
             public void onClick(View v) {
                 Toast.makeText(context, "Skipped", Toast.LENGTH_SHORT).show();
                 DismissAlert(position);
+                dismissAlert.dismiss();
             }
         });
 
-        builder.setView(view);
         /*
         builder.setItems(dismissReasons, new DialogInterface.OnClickListener() {
             @Override
@@ -76,7 +81,7 @@ public class ViewAlertsActivity extends AutoAutoActivity {
             }
         });
          */
-        AlertDialog dismissAlert = builder.create();
+
         dismissAlert.show();
     }
 
