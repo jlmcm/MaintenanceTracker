@@ -41,7 +41,7 @@ public class ViewAlertsActivity extends AutoAutoActivity {
         final ViewAlertsActivity context = this;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Dismiss Alert");
+        //builder.setTitle("Dismiss Alert");
 
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.dismiss_alert_dialog, null);

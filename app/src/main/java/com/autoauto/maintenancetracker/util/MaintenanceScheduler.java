@@ -32,6 +32,9 @@ public class MaintenanceScheduler {
         // add new tasks here
         taskList.add(new TaskTemplate("oil", 3000));
         taskList.add(new TaskTemplate("filter", 10000));
+        taskList.add(new TaskTemplate("test1", 10000));
+        taskList.add(new TaskTemplate("test2", 10000));
+        taskList.add(new TaskTemplate("test3", 10000));
 
         upcomingTasks = new ArrayList<Task>();
         alertedTasks = new ArrayList<Task>();

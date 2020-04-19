@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -38,29 +39,30 @@ public class EditScheduleActivity extends AutoAutoActivity {
 
     // adapted from from ViewAlertsActivity
     public void ModifyDialog(final int position) {
-        final EditScheduleActivity context = this;
-
         TaskTemplate task = application.getVehicle().getMaintenanceScheduler().getTaskList().get(position);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Change Mile Period");
+        //builder.setTitle("Change Mile Period");
 
         // all this for a view
+        // clean this up later
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.edit_mile_dialog, null);
         final EditText etMiles = view.findViewById(R.id.etMiles);
+        Button btApply = view.findViewById(R.id.btApply);
         etMiles.setText("" + task.getAlertPeriodMiles());
 
         builder.setView(view);
+        final AlertDialog modifyDialog = builder.create();
 
-        builder.setPositiveButton("Apply", new DialogInterface.OnClickListener() {
+        btApply.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                context.ChangeSchedule(position, etMiles.getText().toString());
+            public void onClick(View v) {
+                ChangeSchedule(position, etMiles.getText().toString());
+                modifyDialog.dismiss();
             }
         });
 
-        AlertDialog modifyDialog = builder.create();
         modifyDialog.show();
     }
 
