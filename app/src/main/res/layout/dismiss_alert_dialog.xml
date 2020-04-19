@@ -8,8 +8,8 @@
 
     <Button
         android:id="@+id/btPerformed"
-        android:layout_width="215dp"
-        android:layout_height="59dp"
+        android:layout_width="417dp"
+        android:layout_height="61dp"
         android:background="#9DEDE5"
         android:text="Performed"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,8 +18,8 @@
 
     <Button
         android:id="@+id/btSkipped"
-        android:layout_width="215dp"
-        android:layout_height="59dp"
+        android:layout_width="416dp"
+        android:layout_height="61dp"
         android:background="#AEDEDE"
         android:text="Skipped"
         app:layout_constraintEnd_toEndOf="parent"
