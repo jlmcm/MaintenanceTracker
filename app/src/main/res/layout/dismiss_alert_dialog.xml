@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#CCFCFC">
+    android:background="#FFFFFF">
 
     <Button
         android:id="@+id/btPerformed"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_width="215dp"
+        android:layout_height="59dp"
+        android:background="#9DEDE5"
         android:text="Performed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,9 +18,9 @@
 
     <Button
         android:id="@+id/btSkipped"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_width="215dp"
+        android:layout_height="59dp"
+        android:background="#AEDEDE"
         android:text="Skipped"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
