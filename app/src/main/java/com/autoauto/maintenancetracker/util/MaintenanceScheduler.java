@@ -2,14 +2,20 @@ package com.autoauto.maintenancetracker.util;
 
 import android.util.Log;
 
-import java.lang.reflect.Array;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
-public class MaintenanceScheduler {
-    // currentMiles is kind of redundant
-    // but it's the easiest way to re-scope the variable from vehicle
+// handles scheduling of tasks for the Vehicle
+public class MaintenanceScheduler implements Serializable {
+    // currentMiles is a re-scoped copy from Vehicle
     private int currentMiles;
-    public void setCurrentMiles(int miles) { currentMiles = miles; }
+    // this is a little overloaded but w/e
+    public void setCurrentMiles(int miles) {
+        currentMiles = miles;
+        UpdateTasks();
+    }
 
     private ArrayList<TaskTemplate> taskList;
     public ArrayList<TaskTemplate> getTaskList() { return taskList; }
@@ -20,90 +26,113 @@ public class MaintenanceScheduler {
     private ArrayList<Task> alertedTasks;
     public ArrayList<Task> getAlertedTasks() { return alertedTasks; }
 
-    private ArrayList<Task> expiredTasks;
-    public ArrayList<Task> getExpiredTasks() { return expiredTasks; }
-
-    private int nextTaskID;
+    private ArrayList<LoggedTask> expiredTasks;
+    public ArrayList<LoggedTask> getExpiredTasks() { return expiredTasks; }
 
     public MaintenanceScheduler(int miles) {
         currentMiles = miles;
 
         taskList = new ArrayList<TaskTemplate>();
-        // add new tasks here
-        taskList.add(new TaskTemplate("oil", 3000));
-        taskList.add(new TaskTemplate("filter", 10000));
-        taskList.add(new TaskTemplate("test1", 10000));
-        taskList.add(new TaskTemplate("test2", 10000));
-        taskList.add(new TaskTemplate("test3", 10000));
+
+        // master list of tasks to be performed
+        taskList.add(new TaskTemplate("oil", 30));
+        taskList.add(new TaskTemplate("filter", 40));
+        taskList.add(new TaskTemplate("test3", 70));
+        taskList.add(new TaskTemplate("test1", 50));
+        taskList.add(new TaskTemplate("test2", 60));
+
+        Collections.sort(taskList);
 
         upcomingTasks = new ArrayList<Task>();
         alertedTasks = new ArrayList<Task>();
-        expiredTasks = new ArrayList<Task>();
+        expiredTasks = new ArrayList<LoggedTask>();
 
-        nextTaskID = 0;
         for (TaskTemplate t : taskList) {
-            // for debugging
-            alertedTasks.add(new Task(t, currentMiles - 10000, nextTaskID));
-            nextTaskID++;
-
-            expiredTasks.add(new Task(t, currentMiles - 20000, nextTaskID));
-            nextTaskID++;
-
-            // not for debugging
-            upcomingTasks.add(new Task(t, currentMiles, nextTaskID));
-            nextTaskID++;
+            Task task = new Task(t, currentMiles);
+            task.setActive();
+            upcomingTasks.add(task);
         }
     }
 
-    public void ExpireTask(int position) {
+    // helper search funcitons
+    public Task findTaskWithName(String name, ArrayList<Task> tasks) {
+        for(Task t: tasks)
+        {
+            if(t.getName().equals(name)) return t;
+        }
+        return null;
+    }
+
+    public TaskTemplate findTaskTemplateWithName(String name, ArrayList<TaskTemplate> tasks) {
+        for(TaskTemplate t: tasks)
+        {
+            if(t.getName().equals(name)) return t;
+        }
+        return null;
+    }
+
+    // move a Task from alerted to logged
+    public void ExpireTask(int position, String action) {
         Task task = alertedTasks.get(position);
 
         if(task != null) {
             alertedTasks.remove(task);
-            expiredTasks.add(task);
+            expiredTasks.add(0, new LoggedTask(task, action, currentMiles));
+
+            // activate the corresponding current task
+            Task upcoming = findTaskWithName(task.getName(), upcomingTasks);
+            if(upcoming != null)
+            {
+                upcoming.setActive();
+                upcoming.setCreatedMiles(currentMiles);
+            }
+            else Log.e("MaintenanceScheduler", "Tried to activate a task that isn't upcoming");
         }
         else {
-            Log.w("MaintenanceScheduler", "Tried to expire a task that wasn't alerted");
+            Log.e("MaintenanceScheduler", "Tried to expire a task that wasn't alerted") ;
         }
     }
 
+    // update the task templates and upcoming tasks, then request an update for all Tasks
     public void SetMilePeriod(int position, int milePeriod) {
-        // update the task templates, as well as current tasks
-        // also request an update of all tasks
-
         TaskTemplate taskTemplate = taskList.get(position);
-        taskTemplate.setAlertPeriodMiles(milePeriod);
 
-        for (Task t : upcomingTasks) {
-            if(t.getName().equals(taskTemplate.getName())) {
-                t.setAlertPeriodMiles(milePeriod);
-            }
+        if(taskTemplate != null) {
+            taskTemplate.setAlertPeriodMiles(milePeriod);
+
+            Task upcoming = findTaskWithName(taskTemplate.getName(), upcomingTasks);
+            if (upcoming != null) upcoming.setAlertPeriodMiles(milePeriod);
+            else Log.e("MaintenanceScheduler", "Tried to change alert miles for a task that isn't upcoming");
         }
+        else {
+            Log.e("MaintenanceScheduler", "Tried to change alert miles for an invalid task");
+        }
+
+        Collections.sort(taskList);
+        Collections.sort(upcomingTasks);
         UpdateTasks();
     }
 
+    // move a Task from upcoming to alerted
     public void AlertTask(Task task) {
         alertedTasks.add(task);
         upcomingTasks.remove(task);
 
-        // imagine it's 2020 and Java still doesn't have an easy to way find an object by property
-        TaskTemplate template = null;
-        for (TaskTemplate t : taskList) {
-            if(t.getName().equals(task.getName())) template = t;
-        }
-
-        if(template != null) {
-            upcomingTasks.add(new Task(template, currentMiles, nextTaskID));
-            nextTaskID++;
-        }
+        // re-schedule alerted Task as an inactive upcoming from template
+        TaskTemplate template = findTaskTemplateWithName(task.getName(), taskList);
+        if(template != null) upcomingTasks.add(new Task(template, currentMiles));
+        else Log.e("MaintenanceScheduler", "Tried to re-schedule an invalid task");
     }
 
+    // checks all upcoming tasks and alerts them as necessary
     public void UpdateTasks() {
-        // this could be optimized
         ArrayList<Task> temp = new ArrayList<Task>();
 
         for (Task t : upcomingTasks) {
-            if(currentMiles < t.getAlertMileMark()) temp.add(t);
+            // Tasks with createdMiles = -1 are inactive
+            if(t.isActive()) {
+                if (currentMiles >= t.getAlertMileMark()) temp.add(t);
+            }
         }
         for (Task t : temp) AlertTask(t);
     }

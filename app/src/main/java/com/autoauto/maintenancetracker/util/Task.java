@@ -1,17 +1,21 @@
 package com.autoauto.maintenancetracker.util;
 
+// Task that is either upcoming or currently alerted
 public class Task extends TaskTemplate {
-    private int currentMiles;
+    // createdMiles = -1 is an inactive task
+    // ie. re-scheduled, but the same type of task is currently alerted
+    private int createdMiles;
+    public int getCreatedMiles() { return createdMiles; }
+    public void setCreatedMiles(int miles) { createdMiles = miles; }
 
-    // purely for identification from outside methods without relying on address comparisons
-    private int id;
-    public int getId() { return id; }
+    private boolean active = false;
+    public boolean isActive(){ return active; }
+    public void setActive() { active = true; }
 
-    public int getAlertMileMark() { return currentMiles + super.getAlertPeriodMiles(); }
+    public int getAlertMileMark() { return createdMiles + super.getAlertPeriodMiles(); }
 
-    public Task(TaskTemplate taskTemplate, int currentMiles, int id) {
+    public Task(TaskTemplate taskTemplate, int currentMiles) {
         super(taskTemplate.getName(), taskTemplate.getAlertPeriodMiles());
-        this.currentMiles = currentMiles;
-        this.id = id;
+        this.createdMiles = currentMiles;
     }
 }

@@ -1,18 +1,24 @@
 package com.autoauto.maintenancetracker;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.autoauto.maintenancetracker.util.Vehicle;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+// shown when a vehicle can't be loaded
+// handles vehicle creation
 public class AddVehicleActivity extends AutoAutoActivity {
     Button btCreate;
     EditText etMake, etModel, etYear;
+    TextView tvStatus;
+    int miles = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +31,16 @@ public class AddVehicleActivity extends AutoAutoActivity {
 
         btCreate = findViewById(R.id.btCreate);
         btCreate.setOnClickListener(clickCreate);
+
+        tvStatus = findViewById(R.id.tvStatus);
+    }
+
+    @Override
+    protected void UpdateMiles(int miles) {
+        this.miles = miles;
+        tvStatus.setText("Connected: " + miles + " miles");
+        tvStatus.setTextColor(Color.DKGRAY);
+        btCreate.setEnabled(true);
     }
 
     View.OnClickListener clickCreate = new View.OnClickListener() {
@@ -33,12 +49,10 @@ public class AddVehicleActivity extends AutoAutoActivity {
             String make = etMake.getText().toString();
             String model = etModel.getText().toString();
             String year = etYear.getText().toString();
-            Log.i("onClick", String.format("%s, %s, %s", make, model, year));
 
-            if (!make.equals("") && !model.equals("") && !year.equals("")) {
-                application.setVehicle(new Vehicle(make, model, year, application.getMilesTemp()));
-                // commented out for debugging
-                // application.SaveVehicle();
+            if (!make.equals("") && !model.equals("") && !year.equals("") && miles != -1) {
+                application.setVehicle(new Vehicle(make, model, year, miles));
+                application.SaveVehicle();
                 finish();
             }
             else {

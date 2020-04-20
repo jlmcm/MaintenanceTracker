@@ -13,9 +13,8 @@ import com.autoauto.maintenancetracker.util.Task;
 
 import java.util.ArrayList;
 
-// android dev must be some sort of sick practical joke or something wtf
-// i   l o v e   t y p i n g   b o i l e r p l a t e   c o d e
-
+// Adapter for alerts, nothing too special
+// tied directly to ViewAlertsActivity
 public class AlertAdapter extends RecyclerView.Adapter<AlertAdapter.ViewHolder> {
     private ViewAlertsActivity context;
     private ArrayList<Task> alerts;

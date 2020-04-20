@@ -2,16 +2,22 @@ package com.autoauto.maintenancetracker;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.autoauto.maintenancetracker.util.Vehicle;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
+// displays vehicle information
 public class AboutVehicleActivity extends AutoAutoActivity {
-    TextView tvMake, tvModel, tvYear, tvMiles;
+    TextView tvMake, tvModel, tvYear, tvMiles, tvLastUpdated;
     Button btAlerts, btMaintenance, btEditVehicle;
+    SimpleDateFormat dateFormatter = new SimpleDateFormat("h:mm a 'on' EEE, MM/dd/yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +28,7 @@ public class AboutVehicleActivity extends AutoAutoActivity {
         tvModel = findViewById(R.id.tvModel);
         tvYear = findViewById(R.id.tvYear);
         tvMiles = findViewById(R.id.tvMiles);
+        tvLastUpdated = findViewById(R.id.tvLastUpdated);
 
         btAlerts = findViewById(R.id.btAlerts);
         btAlerts.setOnClickListener(clickAlerts);
@@ -37,22 +44,31 @@ public class AboutVehicleActivity extends AutoAutoActivity {
     public void onResume() {
         super.onResume();
         Vehicle vehicle = application.getVehicle();
-        Log.i("AboutVehicle", "onResume was called");
-        Log.i("onResume", String.format("%s, %s, %s", vehicle.getMake(), vehicle.getModel(), vehicle.getYear()));
 
         tvMake.setText(vehicle.getMake());
         tvModel.setText(vehicle.getModel());
         tvYear.setText(vehicle.getYear());
         tvMiles.setText(vehicle.getMiles() + " Miles");
 
+        Date lastUpdate = vehicle.getLastUpdate();
+        tvLastUpdated.setText("Last updated: " + dateFormatter.format(lastUpdate));
+
         int alertCount = vehicle.getMaintenanceScheduler().getAlertedTasks().size();
-        if(alertCount == 0) {
-            btAlerts.setEnabled(false);
-            btAlerts.setText("0 Alerts");
-        }
-        else {
-            btAlerts.setText(alertCount + " Alerts");
-        }
+        btAlerts.setText(alertCount + " Alerts");
+    }
+
+    @Override
+    protected void UpdateMiles(int miles) {
+        super.UpdateMiles(miles);
+        Vehicle vehicle = application.getVehicle();
+
+        tvMiles.setText(vehicle.getMiles() + " Miles");
+
+        Date lastUpdate = vehicle.getLastUpdate();
+        tvLastUpdated.setText("Last updated: " + dateFormatter.format(lastUpdate));
+
+        int alertCount = vehicle.getMaintenanceScheduler().getAlertedTasks().size();
+        btAlerts.setText(alertCount + " Alerts");
     }
 
     View.OnClickListener clickAlerts = new View.OnClickListener() {

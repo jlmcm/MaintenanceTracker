@@ -1,12 +1,9 @@
 package com.autoauto.maintenancetracker;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.autoauto.maintenancetracker.util.MaintenanceScheduler;
 import com.autoauto.maintenancetracker.util.TaskTemplate;
 import com.autoauto.maintenancetracker.util.Vehicle;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
+// displays maintenence tasks and allows editing
 public class EditScheduleActivity extends AutoAutoActivity {
     RecyclerView rvSchedule;
 
@@ -37,23 +33,20 @@ public class EditScheduleActivity extends AutoAutoActivity {
         rvSchedule.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    // adapted from from ViewAlertsActivity
     public void ModifyDialog(final int position) {
         TaskTemplate task = application.getVehicle().getMaintenanceScheduler().getTaskList().get(position);
 
+        // create dialog and set up view
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        //builder.setTitle("Change Mile Period");
-
-        // all this for a view
-        // clean this up later
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.edit_mile_dialog, null);
+        builder.setView(view);
+        final AlertDialog modifyDialog = builder.create();
+
+        // set up controls
         final EditText etMiles = view.findViewById(R.id.etMiles);
         Button btApply = view.findViewById(R.id.btApply);
         etMiles.setText("" + task.getAlertPeriodMiles());
-
-        builder.setView(view);
-        final AlertDialog modifyDialog = builder.create();
 
         btApply.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,12 +62,17 @@ public class EditScheduleActivity extends AutoAutoActivity {
     public void ChangeSchedule(int position, String mileString) {
         try {
             int milePeriod = Integer.parseInt(mileString);
+            if(milePeriod <= 0) throw new IllegalArgumentException();
+
             application.getVehicle().getMaintenanceScheduler().SetMilePeriod(position, milePeriod);
-            Toast.makeText(this, "Updated Settings", Toast.LENGTH_SHORT).show();
-            rvSchedule.getAdapter().notifyItemChanged(position);
+            rvSchedule.getAdapter().notifyDataSetChanged();
+            Toast.makeText(this, "Updated settings", Toast.LENGTH_SHORT).show();
         }
         catch (NumberFormatException e) {
             Toast.makeText(this, "Invalid entry", Toast.LENGTH_SHORT).show();
+        }
+        catch (IllegalArgumentException e) {
+            Toast.makeText(this, "Miles must be positive", Toast.LENGTH_SHORT).show();
         }
     }
 }

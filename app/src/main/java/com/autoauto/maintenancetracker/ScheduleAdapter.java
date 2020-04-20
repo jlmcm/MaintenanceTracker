@@ -1,30 +1,20 @@
 package com.autoauto.maintenancetracker;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.autoauto.maintenancetracker.util.Task;
 import com.autoauto.maintenancetracker.util.TaskTemplate;
 
 import java.util.ArrayList;
 
-// android dev must be some sort of sick practical joke or something wtf
-// i   l o v e   t y p i n g   b o i l e r p l a t e   c o d e
-
-// basically a modified AlertAdapter
-
+// Adapter for task templates
+// tied to EditScheduleActivity
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHolder> {
     private EditScheduleActivity context;
     private ArrayList<TaskTemplate> tasks;

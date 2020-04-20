@@ -4,40 +4,29 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
-import com.autoauto.maintenancetracker.util.DataLibrary;
 import com.autoauto.maintenancetracker.util.Vehicle;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+// base application
 public class AutoAutoApplication extends Application {
-    // app-wide data can go here
     private Vehicle vehicle;
     public Vehicle getVehicle() { return vehicle; }
 
-    // this is just to hold miles in case the car hasn't been initialized yet
-    private int milesTemp = -1;
-    public int getMilesTemp() { return milesTemp; }
-
     public void UpdateMiles(int miles) {
         if(vehicle != null) {
-            if (vehicle.getMiles() < miles) {
-                vehicle.setMiles(miles);
-            }
-        }
-        else {
-            milesTemp = miles;
+            vehicle.setMiles(miles);
+            vehicle.setLastUpdate();
         }
     }
 
     public void setVehicle(Vehicle vehicle) {
         if(this.vehicle != null) {
-            Log.w("Application", "Non-null vehicle was set");
+            Log.e("AutoAutoApplication", "Non-null vehicle was set (overwritten)");
         }
         this.vehicle = vehicle;
     }
@@ -50,12 +39,14 @@ public class AutoAutoApplication extends Application {
                 oOutputStream.writeObject(vehicle);
                 oOutputStream.close();
                 fOutputStream.close();
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 Log.e("IO Error", "Couldn't open car_data for writing");
+                Log.e("IO Error", e.toString());
             }
         }
         else {
-            Log.w("Save", "Tried to save a null vehicle");
+            Log.e("Save", "Tried to save a null vehicle");
         }
     }
 
@@ -71,5 +62,10 @@ public class AutoAutoApplication extends Application {
         } catch (ClassNotFoundException e) {
             Log.e("IO Error", "Couldn't parse vehicle class from file");
         }
+    }
+
+    public void DeleteVehicle() {
+        vehicle = null;
+        deleteFile("car_data");
     }
 }

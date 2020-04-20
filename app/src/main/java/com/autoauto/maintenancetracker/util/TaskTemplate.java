@@ -1,6 +1,9 @@
 package com.autoauto.maintenancetracker.util;
 
-public class TaskTemplate {
+import java.io.Serializable;
+
+// template for Tasks that holds basic data for re-scheduling
+public class TaskTemplate implements Serializable, Comparable {
     private String name;
     public String getName() { return name; }
 
@@ -11,5 +14,12 @@ public class TaskTemplate {
     public TaskTemplate(String name, int milesUntilAlert) {
         this.name = name;
         this.alertPeriodMiles = milesUntilAlert;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if(!(o instanceof TaskTemplate)) throw new IllegalArgumentException();
+        if(alertPeriodMiles == ((TaskTemplate) o).alertPeriodMiles) return 0;
+        return alertPeriodMiles - ((TaskTemplate) o).alertPeriodMiles;
     }
 }

@@ -2,13 +2,8 @@ package com.autoauto.maintenancetracker;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.openxc.VehicleManager;
-
+// initial Activity/splash screen
 public class MainActivity extends AutoAutoActivity {
 
     @Override

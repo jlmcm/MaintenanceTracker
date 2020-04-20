@@ -1,13 +1,10 @@
 package com.autoauto.maintenancetracker;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -19,9 +16,9 @@ import com.autoauto.maintenancetracker.util.Vehicle;
 
 import java.util.ArrayList;
 
+// shows current alerts and allows dismissal
 public class ViewAlertsActivity extends AutoAutoActivity {
     RecyclerView rvAlerts;
-    private String[] dismissReasons = {"Performed", "Skipped"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,59 +34,50 @@ public class ViewAlertsActivity extends AutoAutoActivity {
         rvAlerts.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    @Override
+    protected void UpdateMiles(int miles) {
+        super.UpdateMiles(miles);
+        rvAlerts.getAdapter().notifyDataSetChanged();
+    }
+
     public void DismissDialog(final int position) {
         final ViewAlertsActivity context = this;
 
+        // create dialog and set up view
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        //builder.setTitle("Dismiss Alert");
-
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.dismiss_alert_dialog, null);
-
-        // performed button
-        Button btPerformed = view.findViewById(R.id.btPerformed);
-
         builder.setView(view);
         final AlertDialog dismissAlert = builder.create();
 
+        // set up controls
+        Button btPerformed = view.findViewById(R.id.btPerformed);
         btPerformed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "Performed", Toast.LENGTH_SHORT).show();
-                DismissAlert(position);
+                DismissAlert(position, "Performed");
                 dismissAlert.dismiss();
             }
         });
 
-        // skipped button
         Button btSkipped = view.findViewById(R.id.btSkipped);
         btSkipped.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "Skipped", Toast.LENGTH_SHORT).show();
-                DismissAlert(position);
+                DismissAlert(position, "Skipped");
                 dismissAlert.dismiss();
             }
         });
 
-        /*
-        builder.setItems(dismissReasons, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(context, dismissReasons[which], Toast.LENGTH_SHORT).show();
-                context.DismissAlert(position);
-            }
-        });
-         */
-
         dismissAlert.show();
     }
 
-    public void DismissAlert(int position) {
-        // need to attach the reason here
+    public void DismissAlert(int position, String action) {
         MaintenanceScheduler maintenanceScheduler = application.getVehicle().getMaintenanceScheduler();
         
-        maintenanceScheduler.ExpireTask(position);
+        maintenanceScheduler.ExpireTask(position, action);
         rvAlerts.getAdapter().notifyItemRemoved(position);
     }
 }

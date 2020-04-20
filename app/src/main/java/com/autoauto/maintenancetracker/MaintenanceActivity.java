@@ -2,6 +2,7 @@ package com.autoauto.maintenancetracker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -10,6 +11,9 @@ import com.autoauto.maintenancetracker.util.MaintenanceScheduler;
 import com.autoauto.maintenancetracker.util.Task;
 import com.autoauto.maintenancetracker.util.Vehicle;
 
+import java.util.ArrayList;
+
+// displays task information
 public class MaintenanceActivity extends AutoAutoActivity {
     TextView tvUpcomingPlaceholder;
     Button btAlerts, btLog, btEditSchedule;
@@ -34,26 +38,42 @@ public class MaintenanceActivity extends AutoAutoActivity {
     @Override
     public void onResume() {
         super.onResume();
+
+        int alertCount = application.getVehicle().getMaintenanceScheduler().getAlertedTasks().size();
+        btAlerts.setText(alertCount + " Alerts");
+
+        tvUpcomingPlaceholder.setText(listUpcomingTasks());
+    }
+
+    @Override
+    protected void UpdateMiles(int miles) {
+        super.UpdateMiles(miles);
+
+        int alertCount = application.getVehicle().getMaintenanceScheduler().getAlertedTasks().size();
+        btAlerts.setText(alertCount + " Alerts");
+
+        tvUpcomingPlaceholder.setText(listUpcomingTasks());
+    }
+
+    private String listUpcomingTasks() {
         Vehicle vehicle = application.getVehicle();
         MaintenanceScheduler scheduler = vehicle.getMaintenanceScheduler();
-
-        int alertCount = vehicle.getMaintenanceScheduler().getAlertedTasks().size();
-        if(alertCount == 0) {
-            // disabled for debugging
-            // btAlerts.setEnabled(false);
-            btAlerts.setText("0 Alerts");
-        }
-        else {
-            btAlerts.setText(alertCount + " Alerts");
-        }
-
-        // for debugging, can probably look neater or something
         String upcomingTasks = "";
+
+        // technically inefficient but w/e
         for (Task t : scheduler.getUpcomingTasks()) {
-            int miles = t.getAlertMileMark() - vehicle.getMiles();
-            upcomingTasks += t.getName() + " in " + miles + " miles\n";
+            if(!t.isActive()) {
+                int miles = vehicle.getMiles() - t.getCreatedMiles();
+                upcomingTasks += t.getName() + "  " + miles + " miles ago\n";
+            }
         }
-        tvUpcomingPlaceholder.setText(upcomingTasks);
+        for (Task t : scheduler.getUpcomingTasks()) {
+            if(t.isActive()) {
+                int miles = t.getAlertMileMark() - vehicle.getMiles();
+                upcomingTasks += t.getName() + " in " + miles + " miles\n";
+            }
+        }
+        return upcomingTasks;
     }
 
     View.OnClickListener clickAlerts = new View.OnClickListener() {

@@ -1,6 +1,11 @@
 package com.autoauto.maintenancetracker.util;
 
-public class Vehicle {
+import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
+
+// holds vehicle information and has a maintenance scheduler
+public class Vehicle implements Serializable {
     private String make;
     public String getMake() { return make; }
 
@@ -20,11 +25,17 @@ public class Vehicle {
     private MaintenanceScheduler maintenanceScheduler;
     public MaintenanceScheduler getMaintenanceScheduler() { return maintenanceScheduler; }
 
+    private Date lastUpdate;
+    public Date getLastUpdate() { return lastUpdate; }
+    public void setLastUpdate() { lastUpdate = Calendar.getInstance().getTime(); }
+
     public Vehicle(String make, String model, String year, int miles) {
         this.make = make;
         this.model = model;
         this.year = year;
+        this.miles = miles;
         this.maintenanceScheduler = new MaintenanceScheduler(miles);
+        lastUpdate = Calendar.getInstance().getTime();
     }
 
     public void setInfo(String make, String model, String year) {
