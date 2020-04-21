@@ -8,8 +8,8 @@
     tools:context=".MaintenanceActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="237dp"
-        android:layout_height="565dp"
+        android:layout_width="241dp"
+        android:layout_height="645dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,89 +19,122 @@
             android:id="@+id/tvCurrentAlerts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="262dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginBottom="312dp"
             android:text="Current Alerts"
             android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.08"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.564" />
 
         <TextView
             android:id="@+id/tvUpcomingAlerts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
+            android:layout_width="241dp"
+            android:layout_height="39dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="43dp"
+            android:layout_marginEnd="31dp"
+            android:layout_marginBottom="570dp"
             android:text="Upcoming Alerts"
+            android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintHorizontal_bias="0.459"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btAlerts" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/tvUpcomingPlaceholder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_width="238dp"
+            android:layout_height="195dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="83dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="392dp"
+            android:background="#FBF5E0"
             android:text="Oil: in 500 miles\netc\netc"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvUpcomingAlerts" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/btEditSchedule"
             android:layout_width="251dp"
             android:layout_height="68dp"
+            android:layout_marginTop="480dp"
+            android:layout_marginBottom="17dp"
             android:background="#AEDEDE"
             android:text="Edit Schedule"
             android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btLog" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvPastAlerts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginStart="59dp"
+            android:layout_marginTop="370dp"
+            android:layout_marginEnd="59dp"
+            android:layout_marginBottom="163dp"
             android:text="Past Alerts"
             android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvUpcomingPlaceholder" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.487" />
 
         <Button
             android:id="@+id/btAlerts"
             android:layout_width="251dp"
             android:layout_height="68dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="261dp"
+            android:layout_marginBottom="236dp"
             android:background="#F8CCDA"
             android:text="# Alerts"
             android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCurrentAlerts" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.787" />
 
         <Button
             android:id="@+id/btLog"
             android:layout_width="251dp"
             android:layout_height="68dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="411dp"
+            android:layout_marginBottom="86dp"
             android:background="#9EE4ED"
             android:text="View Alert Log"
             android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPastAlerts" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

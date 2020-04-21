@@ -89,12 +89,13 @@
 
         <Button
             android:id="@+id/btSave"
-            android:layout_width="300dp"
-            android:layout_height="76dp"
+            android:layout_width="302dp"
+            android:layout_height="77dp"
             android:layout_marginTop="32dp"
             android:background="#AEDEDE"
             android:text="Save Vehicle"
             android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etYear" />
@@ -106,6 +107,7 @@
             android:background="#9EE4ED"
             android:text="Cancel"
             android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -113,10 +115,12 @@
 
         <Button
             android:id="@+id/btDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_width="302dp"
+            android:layout_height="77dp"
+            android:background="#F8CCDA"
             android:text="Delete Vehicle/Maintenance"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btCancel" />

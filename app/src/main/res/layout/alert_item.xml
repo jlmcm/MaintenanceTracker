@@ -7,19 +7,20 @@
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="81dp"
         android:layout_weight="1"
         android:background="#CCFCFC">
 
         <ImageView
             android:id="@+id/ivIcon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="94dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="16dp"
             android:layout_weight="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_gallery" />
+            app:srcCompat="?android:attr/alertDialogIcon" />
 
         <TextView
             android:id="@+id/tvName"

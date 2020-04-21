@@ -7,27 +7,33 @@
 
     <Button
         android:id="@+id/btDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="356dp"
+        android:layout_height="59dp"
+        android:background="#F8CCDA"
         android:text="Delete Vehicle"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvWarning" />
 
     <TextView
         android:id="@+id/tvWarning"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="360dp"
+        android:layout_height="133dp"
+        android:background="#CCFCFC"
         android:text="Warning: Deleting the vehicle will also remove all scheduling information as well as alerts and mainteenance history.\n\nAre you sure you wish to delete the vehicle?\n(Note: This will also close the App)"
         android:textAlignment="center"
+        android:textColor="#FF1B1B"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="357dp"
+        android:layout_height="58dp"
+        android:background="#FBF5E0"
         android:text="Cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

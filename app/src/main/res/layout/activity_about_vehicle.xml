@@ -30,6 +30,7 @@
             android:background="#9DEDE5"
             android:text="Maintenance"
             android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,8 +54,8 @@
 
         <ImageView
             android:id="@+id/ivPhoto"
-            android:layout_width="157dp"
-            android:layout_height="149dp"
+            android:layout_width="95dp"
+            android:layout_height="92dp"
             android:layout_marginStart="67dp"
             android:layout_marginTop="80dp"
             android:layout_marginEnd="67dp"
@@ -85,6 +86,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.363"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -97,6 +99,7 @@
             android:background="#A7ECEA"
             android:text="Edit Vehicle"
             android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -147,6 +150,7 @@
             android:background="#F8CCDA"
             android:text="# Alerts"
             android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
