@@ -15,8 +15,6 @@ public class MainActivity extends AutoAutoActivity {
     @Override
     public void onResume() {
         super.onResume();
-        application.LoadVehicle();
-
         if(application.getVehicle() == null) {
             Intent addVehicle = new Intent(this, AddVehicleActivity.class);
             startActivity(addVehicle);

@@ -1,6 +1,9 @@
 package com.autoauto.maintenancetracker.util;
 
+import android.content.Context;
 import android.util.Log;
+
+import com.autoauto.maintenancetracker.AutoAutoApplication;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,9 +15,9 @@ public class MaintenanceScheduler implements Serializable {
     // currentMiles is a re-scoped copy from Vehicle
     private int currentMiles;
     // this is a little overloaded but w/e
-    public void setCurrentMiles(int miles) {
+    public void setCurrentMiles(int miles, AutoAutoApplication application) {
         currentMiles = miles;
-        UpdateTasks();
+        UpdateTasks(application);
     }
 
     private ArrayList<TaskTemplate> taskList;
@@ -46,6 +49,18 @@ public class MaintenanceScheduler implements Serializable {
         upcomingTasks = new ArrayList<Task>();
         alertedTasks = new ArrayList<Task>();
         expiredTasks = new ArrayList<LoggedTask>();
+
+        for (TaskTemplate t : taskList) {
+            Task task = new Task(t, currentMiles);
+            task.setActive();
+            upcomingTasks.add(task);
+        }
+    }
+
+    public void ResetTasks() {
+        upcomingTasks.clear();
+        alertedTasks.clear();
+        expiredTasks.clear();
 
         for (TaskTemplate t : taskList) {
             Task task = new Task(t, currentMiles);
@@ -94,7 +109,7 @@ public class MaintenanceScheduler implements Serializable {
     }
 
     // update the task templates and upcoming tasks, then request an update for all Tasks
-    public void SetMilePeriod(int position, int milePeriod) {
+    public void SetMilePeriod(int position, int milePeriod, AutoAutoApplication application) {
         TaskTemplate taskTemplate = taskList.get(position);
 
         if(taskTemplate != null) {
@@ -110,13 +125,14 @@ public class MaintenanceScheduler implements Serializable {
 
         Collections.sort(taskList);
         Collections.sort(upcomingTasks);
-        UpdateTasks();
+        UpdateTasks(application);
     }
 
     // move a Task from upcoming to alerted
-    public void AlertTask(Task task) {
+    public void AlertTask(Task task, AutoAutoApplication application) {
         alertedTasks.add(task);
         upcomingTasks.remove(task);
+        application.notifyAlert();
 
         // re-schedule alerted Task as an inactive upcoming from template
         TaskTemplate template = findTaskTemplateWithName(task.getName(), taskList);
@@ -125,15 +141,23 @@ public class MaintenanceScheduler implements Serializable {
     }
 
     // checks all upcoming tasks and alerts them as necessary
-    public void UpdateTasks() {
+    public void UpdateTasks(AutoAutoApplication application) {
         ArrayList<Task> temp = new ArrayList<Task>();
 
         for (Task t : upcomingTasks) {
-            // Tasks with createdMiles = -1 are inactive
             if(t.isActive()) {
                 if (currentMiles >= t.getAlertMileMark()) temp.add(t);
             }
         }
-        for (Task t : temp) AlertTask(t);
+        for (Task t : temp) AlertTask(t, application);
+    }
+
+    public void RemoveLoggedTask(int position) {
+        LoggedTask task = expiredTasks.get(position);
+        if (task != null)
+        {
+            expiredTasks.remove(task);
+        }
+        else Log.e("MaintenanceScheduler", "Tried to remove a non-expired task");
     }
 }

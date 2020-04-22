@@ -18,7 +18,7 @@ public class AddVehicleActivity extends AutoAutoActivity {
     Button btCreate;
     EditText etMake, etModel, etYear;
     TextView tvStatus;
-    int miles = -1;
+    int miles = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,6 @@ public class AddVehicleActivity extends AutoAutoActivity {
         this.miles = miles;
         tvStatus.setText("Connected: " + miles + " miles");
         tvStatus.setTextColor(Color.DKGRAY);
-        btCreate.setEnabled(true);
     }
 
     View.OnClickListener clickCreate = new View.OnClickListener() {

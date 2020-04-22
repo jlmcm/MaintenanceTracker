@@ -64,7 +64,7 @@ public class EditScheduleActivity extends AutoAutoActivity {
             int milePeriod = Integer.parseInt(mileString);
             if(milePeriod <= 0) throw new IllegalArgumentException();
 
-            application.getVehicle().getMaintenanceScheduler().SetMilePeriod(position, milePeriod);
+            application.getVehicle().getMaintenanceScheduler().SetMilePeriod(position, milePeriod, application);
             rvSchedule.getAdapter().notifyDataSetChanged();
             Toast.makeText(this, "Updated settings", Toast.LENGTH_SHORT).show();
         }

@@ -1,5 +1,7 @@
 package com.autoauto.maintenancetracker.util;
 
+import com.autoauto.maintenancetracker.AutoAutoApplication;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,9 +19,10 @@ public class Vehicle implements Serializable {
 
     private int miles;
     public int getMiles() { return miles; }
-    public void setMiles(int miles) {
+    public void setMiles(int miles, AutoAutoApplication application) {
         this.miles = miles;
-        maintenanceScheduler.setCurrentMiles(miles);
+        setLastUpdate();
+        maintenanceScheduler.setCurrentMiles(miles, application);
     }
 
     private MaintenanceScheduler maintenanceScheduler;
@@ -35,7 +38,7 @@ public class Vehicle implements Serializable {
         this.year = year;
         this.miles = miles;
         this.maintenanceScheduler = new MaintenanceScheduler(miles);
-        lastUpdate = Calendar.getInstance().getTime();
+        setLastUpdate();
     }
 
     public void setInfo(String make, String model, String year) {

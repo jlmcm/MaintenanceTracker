@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.autoauto.maintenancetracker.util.Task;
+import com.autoauto.maintenancetracker.util.Vehicle;
 
 import java.util.ArrayList;
 
@@ -18,12 +19,10 @@ import java.util.ArrayList;
 public class AlertAdapter extends RecyclerView.Adapter<AlertAdapter.ViewHolder> {
     private ViewAlertsActivity context;
     private ArrayList<Task> alerts;
-    private int currentMiles;
 
-    public AlertAdapter(ViewAlertsActivity context, ArrayList<Task> alerts, int miles) {
+    public AlertAdapter(ViewAlertsActivity context, ArrayList<Task> alerts) {
         this.context = context;
         this.alerts = alerts;
-        this.currentMiles = miles;
     }
 
     @NonNull
@@ -46,7 +45,8 @@ public class AlertAdapter extends RecyclerView.Adapter<AlertAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.tvName.setText(alerts.get(position).getName());
-        holder.tvMilesAgo.setText(currentMiles - alerts.get(position).getAlertMileMark() + " Miles Ago");
+        Vehicle vehicle = context.application.getVehicle();
+        holder.tvMilesAgo.setText(vehicle.getMiles() - alerts.get(position).getAlertMileMark() + " Miles Ago");
     }
 
     @Override

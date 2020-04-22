@@ -15,13 +15,13 @@ import com.autoauto.maintenancetracker.util.LoggedTask;
 import java.util.ArrayList;
 
 // Adapter for logged tasks
-// not tied to an activity per se
+// tied to ViewLogActivity
 public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder> {
-    private Context context;
+    private ViewLogActivity context;
     private ArrayList<LoggedTask> logs;
     private int currentMiles;
 
-    public LogAdapter(Context context, ArrayList<LoggedTask> logs, int miles) {
+    public LogAdapter(ViewLogActivity context, ArrayList<LoggedTask> logs, int miles) {
         this.context = context;
         this.logs = logs;
         this.currentMiles = miles;
@@ -32,7 +32,16 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.log_item, parent, false);
-        return new ViewHolder(view);
+
+        final ViewHolder viewHolder = new ViewHolder(view);
+
+        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.DeleteDialog(viewHolder.getAdapterPosition());
+            }
+        });
+        return viewHolder;
     }
 
     @Override

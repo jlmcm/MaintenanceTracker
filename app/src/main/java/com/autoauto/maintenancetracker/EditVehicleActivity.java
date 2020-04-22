@@ -2,17 +2,22 @@ package com.autoauto.maintenancetracker;
 
 import androidx.appcompat.app.AlertDialog;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.autoauto.maintenancetracker.util.Vehicle;
 
 public class EditVehicleActivity extends AutoAutoActivity {
-    Button btSave, btCancel, btDelete;
+    int pressCounter = 0;
+    TextView tvMake;
+    Button btSave, btCancel, btDelete, btDebug;
     EditText etMake, etModel, etYear;
 
     @Override
@@ -21,6 +26,9 @@ public class EditVehicleActivity extends AutoAutoActivity {
         setContentView(R.layout.activity_edit_vehicle);
 
         Vehicle vehicle = application.getVehicle();
+
+        tvMake = findViewById(R.id.tvMake);
+        tvMake.setOnClickListener(clickMake);
 
         etMake = findViewById(R.id.etMake);
         etMake.setText(vehicle.getMake());
@@ -39,6 +47,16 @@ public class EditVehicleActivity extends AutoAutoActivity {
 
         btDelete = findViewById(R.id.btDelete);
         btDelete.setOnClickListener(clickDelete);
+
+        btDebug = findViewById(R.id.btDebug);
+        btDebug.setOnClickListener(clickDebug);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (application.isDebugMode()) btDebug.setVisibility(View.VISIBLE);
+        else btDebug.setVisibility(View.GONE);
     }
 
     // nearly identical to the one in AddVehicle
@@ -58,6 +76,18 @@ public class EditVehicleActivity extends AutoAutoActivity {
                 if(make.equals("")) etMake.setError("Please specify a make");
                 if(model.equals("")) etModel.setError("Please specify a model");
                 if(year.equals("")) etYear.setError("Please specify a year");
+            }
+        }
+    };
+
+    View.OnClickListener clickMake = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            pressCounter++;
+            if (pressCounter >= 10) {
+                Toast.makeText(EditVehicleActivity.this, "Debug Mode Activated", Toast.LENGTH_SHORT).show();
+                application.setDebugMode(true);
+                btDebug.setVisibility(View.VISIBLE);
             }
         }
     };
@@ -101,6 +131,14 @@ public class EditVehicleActivity extends AutoAutoActivity {
             });
 
             deleteAlert.show();
+        }
+    };
+
+    View.OnClickListener clickDebug = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent debugMenu = new Intent(v.getContext(), DebugActivity.class);
+            startActivity(debugMenu);
         }
     };
 }

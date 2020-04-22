@@ -26,7 +26,6 @@ public class AutoAutoActivity extends AppCompatActivity {
     // !!! I had to import guava:24.1-android under Project Structure for openxc to work
     protected AutoAutoApplication application;
     protected VehicleManager mVehicleManager;
-    Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,28 +36,11 @@ public class AutoAutoActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+        application.LoadVehicle();
         if (mVehicleManager == null) {
             Intent managerService = new Intent(this, VehicleManager.class);
             bindService(managerService, mConnection, Context.BIND_AUTO_CREATE);
         }
-
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                AutoAutoActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(application.getVehicle() != null) {
-                            UpdateMiles(application.getVehicle().getMiles() + 10);
-                        }
-                        else {
-                            UpdateMiles(0);
-                        }
-                    }
-                });
-            }
-        }, 5000, 5000);
     }
 
     @Override
@@ -71,7 +53,18 @@ public class AutoAutoActivity extends AppCompatActivity {
             mVehicleManager = null;
         }
         application.SaveVehicle();
-        timer.cancel();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        // same as above
+        if (mVehicleManager != null) {
+            // remove listeners here
+            unbindService(mConnection);
+            mVehicleManager = null;
+        }
+        application.SaveVehicle();
     }
 
     // defines how to interface with the service

@@ -30,13 +30,15 @@ public class ViewAlertsActivity extends AutoAutoActivity {
         Vehicle vehicle = application.getVehicle();
         ArrayList<Task> alerts = vehicle.getMaintenanceScheduler().getAlertedTasks();
 
-        rvAlerts.setAdapter(new AlertAdapter(this, alerts, vehicle.getMiles()));
+        // fix the negative mile thing
+        rvAlerts.setAdapter(new AlertAdapter(this, alerts));
         rvAlerts.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
     protected void UpdateMiles(int miles) {
         super.UpdateMiles(miles);
+        // fix this
         rvAlerts.getAdapter().notifyDataSetChanged();
     }
 
@@ -48,7 +50,7 @@ public class ViewAlertsActivity extends AutoAutoActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.dismiss_alert_dialog, null);
         builder.setView(view);
-        final AlertDialog dismissAlert = builder.create();
+        final AlertDialog dismissDialog = builder.create();
 
         // set up controls
         Button btPerformed = view.findViewById(R.id.btPerformed);
@@ -57,7 +59,7 @@ public class ViewAlertsActivity extends AutoAutoActivity {
             public void onClick(View v) {
                 Toast.makeText(context, "Performed", Toast.LENGTH_SHORT).show();
                 DismissAlert(position, "Performed");
-                dismissAlert.dismiss();
+                dismissDialog.dismiss();
             }
         });
 
@@ -67,11 +69,11 @@ public class ViewAlertsActivity extends AutoAutoActivity {
             public void onClick(View v) {
                 Toast.makeText(context, "Skipped", Toast.LENGTH_SHORT).show();
                 DismissAlert(position, "Skipped");
-                dismissAlert.dismiss();
+                dismissDialog.dismiss();
             }
         });
 
-        dismissAlert.show();
+        dismissDialog.show();
     }
 
     public void DismissAlert(int position, String action) {
