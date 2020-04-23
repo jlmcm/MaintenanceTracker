@@ -101,39 +101,6 @@ public class AutoAutoApplication extends Application {
         deleteFile("car_data");
     }
 
-    // sends reminder notification
-    public void notifyReminder() {
-        Context context = getApplicationContext();
-        Date now = Calendar.getInstance().getTime();
-
-        long daysLong = now.getDay() - vehicle.getLastUpdate().getDay();
-        int days = (int) daysLong;
-        // backwards-compatibility
-        if (Build.VERSION.SDK_INT >= 26) {
-            Notification.Builder builder = new Notification.Builder(context, "0");
-            builder.setSmallIcon(R.drawable.ic_launcher_foreground);
-            builder.setContentTitle("Mileage Reminder");
-            builder.setContentText("Mileage hasn't been updated in " + days + " days");
-            if (Build.VERSION.SDK_INT >= 21)
-                builder.setCategory(NotificationCompat.CATEGORY_REMINDER);
-            Notification notification = builder.build();
-
-            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-            notificationManager.notify(0, notification);
-        }
-        else {
-            Notification.Builder builder = new Notification.Builder(context);
-            builder.setSmallIcon(R.drawable.ic_launcher_foreground);
-            builder.setContentTitle("Mileage Reminder");
-            builder.setContentText("Mileage hasn't been updated in " + days + " days");
-            builder.setPriority(Notification.PRIORITY_DEFAULT);
-            Notification notification = builder.build();
-
-            NotificationManager notificationManager = (NotificationManager) getSystemService(context.NOTIFICATION_SERVICE);
-            notificationManager.notify(0, notification);
-        }
-    }
-
     public void notifyAlert() {
         Context context = getApplicationContext();
 

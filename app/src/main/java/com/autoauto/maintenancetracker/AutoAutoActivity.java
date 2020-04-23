@@ -17,6 +17,8 @@ import com.openxc.VehicleManager;
 import com.openxc.measurements.Measurement;
 import com.openxc.measurements.Odometer;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -35,6 +37,7 @@ public class AutoAutoActivity extends AppCompatActivity {
 
     @Override
     public void onResume() {
+        Log.e("onResume", "resuming");
         super.onResume();
         application.LoadVehicle();
         if (mVehicleManager == null) {
@@ -45,6 +48,7 @@ public class AutoAutoActivity extends AppCompatActivity {
 
     @Override
     public void onPause() {
+        Log.e("onPause", "pausing");
         super.onPause();
         // to "prevent memory leaks"
         if (mVehicleManager != null) {
@@ -53,6 +57,7 @@ public class AutoAutoActivity extends AppCompatActivity {
             mVehicleManager = null;
         }
         application.SaveVehicle();
+        scheduleReminder();
     }
 
     @Override
@@ -64,7 +69,20 @@ public class AutoAutoActivity extends AppCompatActivity {
             unbindService(mConnection);
             mVehicleManager = null;
         }
-        application.SaveVehicle();
+    }
+
+    // schedule reminder alarm
+    public void scheduleReminder() {
+        AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, Reminder.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+
+        // cancel and remake
+        alarmManager.cancel(pendingIntent);
+
+        Date lastUpdate = application.getVehicle().getLastUpdate();
+        long now = Calendar.getInstance().getTimeInMillis();
+        alarmManager.set(AlarmManager.RTC,now + 10000, pendingIntent);
     }
 
     // defines how to interface with the service
@@ -95,8 +113,8 @@ public class AutoAutoActivity extends AppCompatActivity {
         Vehicle vehicle = application.getVehicle();
         if(vehicle != null)
         {
-            if(vehicle.getMiles() <= miles) application.UpdateMiles(miles);
-            else Log.e("AutoAutoActivity", "Miles reported are less than expected");
+            application.UpdateMiles(miles);
+            if(vehicle.getMiles() > miles) Log.e("AutoAutoActivity", "Miles reported are less than expected");
         }
     }
 }

@@ -82,7 +82,8 @@ public class DebugActivity extends AutoAutoActivity {
     View.OnClickListener clickNotification = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            application.notifyReminder();
+            Context context = DebugActivity.this;
+            Reminder.notifyReminder(context);
         }
     };
 }

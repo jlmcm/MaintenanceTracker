@@ -18,7 +18,7 @@ public class EditVehicleActivity extends AutoAutoActivity {
     int pressCounter = 0;
     TextView tvMake;
     Button btSave, btCancel, btDelete, btDebug;
-    EditText etMake, etModel, etYear;
+    EditText etMake, etModel, etYear, etMiles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,9 @@ public class EditVehicleActivity extends AutoAutoActivity {
 
         etYear = findViewById(R.id.etYear);
         etYear.setText(vehicle.getYear());
+
+        etMiles = findViewById(R.id.etMiles);
+        etMiles.setText("" + application.getVehicle().getMiles());
 
         btSave = findViewById(R.id.btSave);
         btSave.setOnClickListener(clickSave);
@@ -66,9 +69,18 @@ public class EditVehicleActivity extends AutoAutoActivity {
             String make = etMake.getText().toString();
             String model = etModel.getText().toString();
             String year = etYear.getText().toString();
+            int miles;
+            try {
+                miles = Integer.parseInt(etMiles.getText().toString());
+            }
+            catch (Exception e)
+            {
+                miles = 0;
+            }
 
-            if (!make.equals("") && !model.equals("") && !year.equals("")) {
+            if (!make.equals("") && !model.equals("") && !year.equals("") && miles >= 0) {
                 application.getVehicle().setInfo(make, model, year);
+                UpdateMiles(miles);
                 application.SaveVehicle();
                 finish();
             }
@@ -76,6 +88,7 @@ public class EditVehicleActivity extends AutoAutoActivity {
                 if(make.equals("")) etMake.setError("Please specify a make");
                 if(model.equals("")) etModel.setError("Please specify a model");
                 if(year.equals("")) etYear.setError("Please specify a year");
+                if(miles < 0) etMiles.setError("Miles must be positive");
             }
         }
     };
