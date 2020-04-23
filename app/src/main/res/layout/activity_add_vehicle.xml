@@ -141,7 +141,7 @@
             android:layout_height="72dp"
             android:layout_marginTop="424dp"
             android:layout_marginBottom="55dp"
-            android:background="#B0F3F3"
+            android:background="#AEDEDE"
             android:text="Create Vehicle"
             android:textSize="18sp"
             android:textStyle="bold"
