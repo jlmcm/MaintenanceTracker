@@ -20,6 +20,7 @@
             android:label="Log" />
         <activity
             android:name=".ViewAlertsActivity"
+            android:launchMode="singleTop"
             android:label="Alerts" />
         <activity
             android:name=".MaintenanceActivity"
@@ -29,6 +30,7 @@
             android:label="Create Vehicle" />
         <activity
             android:name=".AboutVehicleActivity"
+            android:launchMode="singleTop"
             android:label="Vehicle Details" />
         <activity
             android:name=".MainActivity"

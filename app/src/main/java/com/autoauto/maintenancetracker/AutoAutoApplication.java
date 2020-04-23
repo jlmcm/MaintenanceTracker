@@ -4,7 +4,9 @@ import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 
@@ -103,6 +105,8 @@ public class AutoAutoApplication extends Application {
 
     public void notifyAlert() {
         Context context = getApplicationContext();
+        Intent viewAlerts = new Intent(this, ViewAlertsActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, viewAlerts, 0);
 
         // backwards-compatibility
         if (Build.VERSION.SDK_INT >= 26) {
@@ -110,6 +114,7 @@ public class AutoAutoApplication extends Application {
             builder.setSmallIcon(R.drawable.ic_launcher_foreground);
             builder.setContentTitle("Maintenance Alert");
             builder.setContentText("You have new maintenance alerts");
+            builder.setContentIntent(pendingIntent);
             if (Build.VERSION.SDK_INT >= 21)
                 builder.setCategory(NotificationCompat.CATEGORY_ALARM);
             Notification notification = builder.build();
@@ -122,6 +127,7 @@ public class AutoAutoApplication extends Application {
             builder.setSmallIcon(R.drawable.ic_launcher_foreground);
             builder.setContentTitle("Maintenance Alert");
             builder.setContentText("You have new maintenance alerts");
+            builder.setContentIntent(pendingIntent);
             builder.setPriority(Notification.PRIORITY_DEFAULT);
             Notification notification = builder.build();
 

@@ -33,13 +33,13 @@ public class AutoAutoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         application = (AutoAutoApplication) getApplication();
+        if (application.getVehicle() == null) application.LoadVehicle();
     }
 
     @Override
     public void onResume() {
         Log.e("onResume", "resuming");
         super.onResume();
-        application.LoadVehicle();
         if (mVehicleManager == null) {
             Intent managerService = new Intent(this, VehicleManager.class);
             bindService(managerService, mConnection, Context.BIND_AUTO_CREATE);
@@ -57,7 +57,7 @@ public class AutoAutoActivity extends AppCompatActivity {
             mVehicleManager = null;
         }
         application.SaveVehicle();
-        scheduleReminder();
+        if (application.getVehicle() != null) scheduleReminder();
     }
 
     @Override
@@ -81,8 +81,14 @@ public class AutoAutoActivity extends AppCompatActivity {
         alarmManager.cancel(pendingIntent);
 
         Date lastUpdate = application.getVehicle().getLastUpdate();
-        long now = Calendar.getInstance().getTimeInMillis();
-        alarmManager.set(AlarmManager.RTC,now + 10000, pendingIntent);
+        Date now = Calendar.getInstance().getTime();
+
+        long millisPassed = now.getTime() - lastUpdate.getTime();
+        long alarmDelay = 2 * AlarmManager.INTERVAL_DAY - millisPassed;
+        Log.e("millisPassed", "" + millisPassed);
+        Log.e("alarmDelay", "" + alarmDelay);
+
+        alarmManager.set(AlarmManager.RTC, alarmDelay, pendingIntent);
     }
 
     // defines how to interface with the service
