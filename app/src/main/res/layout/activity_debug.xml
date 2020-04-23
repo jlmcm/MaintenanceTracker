@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#545454"
     tools:context=".DebugActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,17 +17,20 @@
 
         <TextView
             android:id="@+id/tvDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="316dp"
+            android:layout_height="27dp"
+            android:background="#D7D5D5"
             android:text="This is a super secret developer menu for testing"
+            android:textColor="#FA0202"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btChangeMileage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="316dp"
+            android:layout_height="65dp"
+            android:background="#FF9800"
             android:text="Change Mileage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,8 +38,9 @@
 
         <Button
             android:id="@+id/btResetTasks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="316dp"
+            android:layout_height="65dp"
+            android:background="#FF5722"
             android:text="Reset All Tasks"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,8 +48,9 @@
 
         <Button
             android:id="@+id/btNotification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="316dp"
+            android:layout_height="65dp"
+            android:background="#FFEB3B"
             android:text="Send Test Notificaiton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
