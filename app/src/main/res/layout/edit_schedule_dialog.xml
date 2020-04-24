@@ -3,58 +3,70 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#CCFCFC">
 
     <TextView
         android:id="@+id/tvMiles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="301dp"
+        android:layout_marginStart="61dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="300dp"
+        android:layout_marginBottom="83dp"
         android:text="Miles:"
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/etMiles"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etMiles" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etMiles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="59dp"
         android:layout_marginEnd="58dp"
+        android:layout_marginBottom="73dp"
         android:ems="10"
         android:hint="Miles"
         android:inputType="number"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btApply"
-        android:layout_width="409dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="408dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginEnd="1dp"
         android:background="#9DEDE5"
         android:text="Apply"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etMiles" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="182dp"
+        android:layout_marginEnd="181dp"
+        android:layout_marginBottom="153dp"
         android:text="Name"
         android:textAlignment="center"
+        android:textColor="#090909"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -63,10 +75,14 @@
         android:id="@+id/tvDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="168dp"
+        android:layout_marginBottom="126dp"
         android:text="Description"
         android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvName" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
