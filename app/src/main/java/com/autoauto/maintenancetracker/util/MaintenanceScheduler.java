@@ -1,13 +1,11 @@
 package com.autoauto.maintenancetracker.util;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.autoauto.maintenancetracker.AutoAutoApplication;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 // handles scheduling of tasks for the Vehicle
@@ -38,11 +36,30 @@ public class MaintenanceScheduler implements Serializable {
         taskList = new ArrayList<TaskTemplate>();
 
         // master list of tasks to be performed
-        taskList.add(new TaskTemplate("oil", 30));
-        taskList.add(new TaskTemplate("filter", 40));
-        taskList.add(new TaskTemplate("test3", 70));
-        taskList.add(new TaskTemplate("test1", 50));
-        taskList.add(new TaskTemplate("test2", 60));
+        taskList.add(new TaskTemplate("Oil and Filter",
+                "Change every 3000-5000 miles. Replace motor oil and filter type "
+                + "following manufacturer specifications.", 3000));
+        taskList.add(new TaskTemplate("Tire Rotation",
+                "Recommended every 6000-8000 or every 6 months.", 6000));
+        taskList.add(new TaskTemplate("Battery",
+                "Inspect and test every 35000-50000 miles and replace every 3 years or "
+                + "as needed.", 35000));
+        taskList.add(new TaskTemplate("Brake Pads/Fluid",
+                "Inspect with every oil change and replace every 50000 miles or as needed.",
+                50000));
+        taskList.add(new TaskTemplate("Coolant",
+                "Change after the first 60000 miles, then every 30000 miles. "
+                + "Check coolant type before replacing." ,30000));
+        taskList.add(new TaskTemplate("Air Filter",
+                "Replace every 15000-30000 miles." ,15000));
+        taskList.add(new TaskTemplate("Fuel Filter",
+                "Replace every 30000 miles or every 2 years." ,30000));
+        taskList.add(new TaskTemplate("Spark Plugs",
+                "Replace every 40000 miles." ,40000));
+        taskList.add(new TaskTemplate("Ignition System",
+                "Inspect every 45000 miles." ,45000));
+        taskList.add(new TaskTemplate("Suspension",
+                "Inspect every 45000 miles." ,45000));
 
         Collections.sort(taskList);
 

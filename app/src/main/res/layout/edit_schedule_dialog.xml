@@ -3,18 +3,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btDelete"
-        android:layout_width="416dp"
-        android:layout_height="66dp"
+    <TextView
+        android:id="@+id/tvMiles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="301dp"
+        android:text="Miles:"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/etMiles"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/etMiles" />
+
+    <EditText
+        android:id="@+id/etMiles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
         android:layout_marginTop="8dp"
-        android:background="#F8CCDA"
-        android:text="Remove Item"
+        android:layout_marginEnd="58dp"
+        android:ems="10"
+        android:hint="Miles"
+        android:inputType="number"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+
+    <Button
+        android:id="@+id/btApply"
+        android:layout_width="409dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="8dp"
+        android:background="#9DEDE5"
+        android:text="Apply"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etMiles" />
 
     <TextView
         android:id="@+id/tvName"

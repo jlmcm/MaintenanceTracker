@@ -9,7 +9,7 @@ public class LoggedTask extends TaskTemplate {
     public int getMilesLoggedAt() { return milesLoggedAt; }
 
     public LoggedTask(Task task, String actionTaken, int milesLoggedAt) {
-        super(task.getName(), task.getAlertPeriodMiles());
+        super(task.getName(), task.getDescription(), task.getAlertPeriodMiles());
         this.actionTaken = actionTaken;
         this.milesLoggedAt = milesLoggedAt;
     }

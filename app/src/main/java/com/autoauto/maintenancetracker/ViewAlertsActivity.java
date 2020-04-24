@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.autoauto.maintenancetracker.util.MaintenanceScheduler;
 import com.autoauto.maintenancetracker.util.Task;
+import com.autoauto.maintenancetracker.util.TaskTemplate;
 import com.autoauto.maintenancetracker.util.Vehicle;
 
 import java.util.ArrayList;
@@ -43,6 +45,8 @@ public class ViewAlertsActivity extends AutoAutoActivity {
     }
 
     public void DismissDialog(final int position) {
+        MaintenanceScheduler maintenanceScheduler = application.getVehicle().getMaintenanceScheduler();
+        Task alert = maintenanceScheduler.getAlertedTasks().get(position);
         final ViewAlertsActivity context = this;
 
         // create dialog and set up view
@@ -51,6 +55,12 @@ public class ViewAlertsActivity extends AutoAutoActivity {
         View view = inflater.inflate(R.layout.dismiss_alert_dialog, null);
         builder.setView(view);
         final AlertDialog dismissDialog = builder.create();
+
+        TextView tvName = view.findViewById(R.id.tvName);
+        tvName.setText(alert.getName());
+
+        TextView tvDescription = view.findViewById(R.id.tvDescription);
+        tvDescription.setText(alert.getDescription());
 
         // set up controls
         Button btPerformed = view.findViewById(R.id.btPerformed);

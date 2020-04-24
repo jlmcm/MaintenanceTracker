@@ -9,8 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.autoauto.maintenancetracker.util.LoggedTask;
+import com.autoauto.maintenancetracker.util.MaintenanceScheduler;
 import com.autoauto.maintenancetracker.util.TaskTemplate;
 import com.autoauto.maintenancetracker.util.Vehicle;
 
@@ -39,9 +42,15 @@ public class EditScheduleActivity extends AutoAutoActivity {
         // create dialog and set up view
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
-        View view = inflater.inflate(R.layout.edit_mile_dialog, null);
+        View view = inflater.inflate(R.layout.edit_schedule_dialog, null);
         builder.setView(view);
         final AlertDialog modifyDialog = builder.create();
+
+        TextView tvName = view.findViewById(R.id.tvName);
+        tvName.setText(task.getName());
+
+        TextView tvDescription = view.findViewById(R.id.tvDescription);
+        tvDescription.setText(task.getDescription());
 
         // set up controls
         final EditText etMiles = view.findViewById(R.id.etMiles);

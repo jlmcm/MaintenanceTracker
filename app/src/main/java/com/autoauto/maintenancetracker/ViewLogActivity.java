@@ -9,10 +9,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.autoauto.maintenancetracker.util.LoggedTask;
 import com.autoauto.maintenancetracker.util.MaintenanceScheduler;
+import com.autoauto.maintenancetracker.util.Task;
 import com.autoauto.maintenancetracker.util.Vehicle;
 
 import java.util.ArrayList;
@@ -39,6 +41,8 @@ public class ViewLogActivity extends AutoAutoActivity {
     }
 
     public void DeleteDialog(final int position) {
+        MaintenanceScheduler maintenanceScheduler = application.getVehicle().getMaintenanceScheduler();
+        LoggedTask log = maintenanceScheduler.getExpiredTasks().get(position);
         final Context context = this;
 
         // create dialog and set up view
@@ -47,6 +51,12 @@ public class ViewLogActivity extends AutoAutoActivity {
         View view = inflater.inflate(R.layout.delete_log_dialog, null);
         builder.setView(view);
         final AlertDialog deleteDialog = builder.create();
+
+        TextView tvName = view.findViewById(R.id.tvName);
+        tvName.setText(log.getName());
+
+        TextView tvDescription = view.findViewById(R.id.tvDescription);
+        tvDescription.setText(log.getDescription());
 
         // set up controls
         Button btDelete = view.findViewById(R.id.btDelete);

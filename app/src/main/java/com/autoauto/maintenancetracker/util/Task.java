@@ -15,7 +15,7 @@ public class Task extends TaskTemplate {
     public int getAlertMileMark() { return createdMiles + super.getAlertPeriodMiles(); }
 
     public Task(TaskTemplate taskTemplate, int currentMiles) {
-        super(taskTemplate.getName(), taskTemplate.getAlertPeriodMiles());
+        super(taskTemplate.getName(), taskTemplate.getDescription(), taskTemplate.getAlertPeriodMiles());
         this.createdMiles = currentMiles;
     }
 }

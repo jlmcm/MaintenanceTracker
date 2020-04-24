@@ -7,12 +7,16 @@ public class TaskTemplate implements Serializable, Comparable {
     private String name;
     public String getName() { return name; }
 
+    private String description;
+    public String getDescription() { return description; }
+
     private int alertPeriodMiles;
     public int getAlertPeriodMiles() { return alertPeriodMiles; }
     public void setAlertPeriodMiles(int miles) { alertPeriodMiles = miles; }
 
-    public TaskTemplate(String name, int milesUntilAlert) {
+    public TaskTemplate(String name, String description, int milesUntilAlert) {
         this.name = name;
+        this.description = description;
         this.alertPeriodMiles = milesUntilAlert;
     }
 
