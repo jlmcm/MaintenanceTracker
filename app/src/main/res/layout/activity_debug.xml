@@ -19,9 +19,9 @@
             android:id="@+id/tvDescription"
             android:layout_width="316dp"
             android:layout_height="27dp"
-            android:background="#D7D5D5"
+            android:background="#545454"
             android:text="This is a super secret developer menu for testing"
-            android:textColor="#FA0202"
+            android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
