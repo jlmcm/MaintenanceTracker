@@ -64,7 +64,7 @@ public class MaintenanceActivity extends AutoAutoActivity {
         for (Task t : scheduler.getUpcomingTasks()) {
             if(!t.isActive()) {
                 int miles = vehicle.getMiles() - t.getCreatedMiles();
-                upcomingTasks += t.getName() + "  " + miles + " miles ago\n";
+                upcomingTasks += t.getName() + " " + miles + " miles ago\n";
             }
         }
         for (Task t : scheduler.getUpcomingTasks()) {

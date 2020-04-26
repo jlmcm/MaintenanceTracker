@@ -21,7 +21,7 @@
         android:layout_width="360dp"
         android:layout_height="133dp"
         android:background="#CCFCFC"
-        android:text="Warning: Deleting the vehicle will also remove all scheduling information as well as alerts and mainteenance history.\n\nAre you sure you wish to delete the vehicle?\n(Note: This will also close the App)"
+        android:text="Warning: Deleting the vehicle will also remove all scheduling information as well as alerts and maintenance history.\n\nAre you sure you wish to delete the vehicle?\n(Note: This will also close the App)"
         android:textAlignment="center"
         android:textColor="#FF1B1B"
         app:layout_constraintEnd_toEndOf="parent"
