@@ -110,7 +110,7 @@ public class AutoAutoApplication extends Application {
 
         // backwards-compatibility
         if (Build.VERSION.SDK_INT >= 26) {
-            Notification.Builder builder = new Notification.Builder(context, "0");
+            Notification.Builder builder = new Notification.Builder(context, "alert");
             builder.setSmallIcon(R.drawable.ic_launcher_foreground);
             builder.setContentTitle("Maintenance Alert");
             builder.setContentText("You have new maintenance alerts");
